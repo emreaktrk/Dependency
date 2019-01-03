@@ -1,0 +1,36 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        jar(MavenPublication) {
+            groupId 'com.akturk.lib'
+            version android.defaultConfig.versionName
+
+            artifact("${buildDir}\\intermediates\\full_jar\\release\\createFullJarRelease\\full.jar")
+
+            pom { packaging 'jar' }
+            pom.withXml {
+                asNode().with() {
+                    appendNode('dependencies').with {
+                        appendNode('dependency').with{
+                            appendNode('groupId', 'com.google.code.gson')
+                            appendNode('artifactId', 'gson')
+                            appendNode('version', '2.8.5')
+                        }
+                        appendNode('dependency').with{
+                            appendNode('groupId', 'com.akturk.volley')
+                            appendNode('artifactId', 'volley')
+                            appendNode('version', '1.1.1')
+                        }
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name 'Desktop'
+            url uri('C:\\Users\\emrea\\Desktop\\clean')
+        }
+    }
+}

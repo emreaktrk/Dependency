@@ -1,0 +1,20 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        jar(MavenPublication) {
+            groupId 'com.akturk.volley'
+            version '1.1.1'
+
+            artifact("${buildDir}\\intermediates\\full_jar\\release\\createFullJarRelease\\full.jar")
+
+            pom { packaging 'jar' }
+        }
+    }
+    repositories {
+        maven {
+            name 'Desktop'
+            url uri('C:\\Users\\emrea\\Desktop\\clean')
+        }
+    }
+}
